@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Siciliano Bath & Tile | Work Gallery</title>
+  <meta name="description" content="Photo gallery of showers, baths, and tile work by Siciliano Bath & Tile. Pittsburgh area. Call 412-849-9884." />
+  <style>
+    :root {
+      --bg: #141210;
+      --bg-2: #1c1916;
+      --card: #24201c;
+      --line: #3a342c;
+      --text: #f4efe6;
+      --muted: #b7ab9c;
+      --accent: #c4a574;
+      --accent-2: #e8d7b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
+    header {
+      padding: 28px 0 18px;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      background: rgba(20, 18, 16, 0.94);
+      backdrop-filter: blur(8px);
+      z-index: 5;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-size: 14px; }
+    .brand img { height: 72px; width: auto; display: block; filter: brightness(0) invert(1); }
+    .brand .fallback { display: none; }
+    .brand.nologo img { display: none; }
+    .brand.nologo .fallback { display: block; }
+    .brand strong { display: block; font-size: 22px; letter-spacing: 0.14em; font-weight: 700; }
+    .brand span { color: var(--accent); font-size: 12px; letter-spacing: 0.22em; }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      color: var(--accent-2);
+      background: transparent;
+      padding: 12px 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .hero { padding: 36px 0 10px; }
+    h1 { font-weight: 500; font-size: clamp(32px, 5vw, 52px); margin: 18px 0 10px; text-align: center; }
+    .lede { color: var(--muted); max-width: 640px; font-size: 18px; margin: 0 0 8px; }
+    .meta { color: var(--accent-2); font-family: Arial, Helvetica, sans-serif; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin: 0; text-align: center; }
+    .warranty { color: var(--muted); font-family: Arial, Helvetica, sans-serif; font-size: 12px; letter-spacing: 0.06em; margin: 6px 0 0; text-transform: uppercase; text-align: center; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+      padding-bottom: 40px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      text-align: left;
+      color: inherit;
+      padding: 0;
+      width: 100%;
+    }
+    .card img, .ph {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      background: #2b261f;
+    }
+    .ph {
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      padding: 16px;
+      text-align: center;
+    }
+    .cap { padding: 12px 12px 14px; }
+    .cap b { display: block; font-weight: 600; font-size: 16px; }
+    .cap small { color: var(--muted); font-family: Arial, Helvetica, sans-serif; }
+    .count {
+      display: block;
+      margin: 0 0 4px;
+      color: var(--accent);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 40px;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+    footer a { color: var(--accent-2); }
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      padding: 20px;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img { max-width: min(1000px, 100%); max-height: 78vh; border-radius: 6px; }
+    #lightbox .box { max-width: 1000px; width: 100%; }
+    #lightbox p { color: #fff; font-family: Arial, Helvetica, sans-serif; }
+    #lightbox .x {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 2;
+    }
+    #lightbox .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      border: 1px solid #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    #prev { left: 12px; }
+    #next { right: 12px; }
+    @media (max-width: 700px) {
+      .wrap { width: min(1100px, calc(100% - 20px)); }
+      header { padding: 12px 0; }
+      .top { flex-direction: column; align-items: stretch; gap: 12px; }
+      .brand { justify-content: center; }
+      .brand img { height: 58px; margin: 0 auto; }
+      .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .btn { text-align: center; padding: 14px 8px; font-size: 15px; }
+      .hero { padding: 22px 0 6px; }
+      h1 { font-size: 34px; }
+      .lede { font-size: 16px; }
+      .grid { grid-template-columns: 1fr; gap: 12px; }
+      .card img, .ph { height: 240px; }
+      footer { padding-bottom: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap top">
+      <div class="brand" id="brand">
+        <img src="images/logo.png" alt="Siciliano Bath and Tile" onerror="document.getElementById('brand').classList.add('nologo')" />
+        <div class="fallback">
+          <strong>Siciliano</strong>
+          <span>Bath & Tile</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn" href="tel:4128499884">Call 412-849-9884</a>
+        <a class="btn" href="mailto:SicilianoTile@gmail.com">Email</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="hero">
+      <p class="meta">Full bath remodels · Showers · Tile</p>
+      <p class="warranty">Lifetime leak warranty on all tiled showers</p>
+      <h1>Work Gallery</h1>
+      <p class="lede">Recent bath and tile jobs. Tap a photo to open it. Call or email for a quote.</p>
+    </section>
+    <section class="grid" id="grid"></section>
+  </main>
+  <footer>
+    <div class="wrap">
+      Siciliano Bath & Tile · <a href="tel:4128499884">412-849-9884</a> · <a href="mailto:SicilianoTile@gmail.com">SicilianoTile@gmail.com</a>
+    </div>
+  </footer>
+  <div id="lightbox" role="dialog">
+    <button class="x" id="close" aria-label="Close">×</button>
+    <button class="nav" id="prev" aria-label="Previous">‹</button>
+    <button class="nav" id="next" aria-label="Next">›</button>
+    <div class="box">
+      <img id="full" alt="" />
+      <p id="fullcap"></p>
+    </div>
+  </div>
+  <script>
+    /* ADD A JOB: copy a block.
+       files: list every photo for that job.
+       First photo in the list is the one shown on the main page.
+       Put the photos in the images folder with those exact names. */
+    const jobs = [
+      { title: "", files: ["images/01a.jpg", "images/01b.jpg", "images/01c.jpg", "images/01d.jpg"], note: "Full Bathroom Remodel (Before glass installation)" },
+      { title: "", files: ["images/02a.jpg", "images/02b.jpg"], note: "Shower Remodel" },
+      { title: "", files: ["images/03a.jpg", "images/03b.jpg", "images/03c.jpg", "images/03d.jpg"], note: "Full Bathroom Remodel" },
+      { title: "", files: ["images/04a.jpg", "images/04b.jpg", "images/04c.jpg", "images/04d.jpg"], note: "Kitchen Backsplash" },
+      { title: "", files: ["images/05a.jpg", "images/05b.jpg", "images/05c.jpg", "images/05d.jpg"], note: "Full Bathroom Remodel" },
+      { title: "", files: ["images/06a.jpg", "images/06b.jpg", "images/06c.jpg", "images/06d.jpg"], note: "Full Bathroom Remodel" },
+      { title: "", files: ["images/07a.jpg", "images/07b.jpg", "images/07c.jpg"], note: "Custom Live Edge Vanity" },
+      { title: "", files: ["images/08a.jpg", "images/08b.jpg"], note: "Shower Remodel" },
+      { title: "", files: ["images/09a.jpg", "images/09b.jpg", "images/09c.jpg"], note: "Shower Remodel" },
+      { title: "", files: ["images/10a.jpg", "images/10b.jpg"], note: "Kitchen Backsplash" },
+      { title: "", files: ["images/11a.jpg", "images/11b.jpg"], note: "Shower Remodel" }
+    ];
+    const grid = document.getElementById("grid");
+    let current = null;
+    let index = 0;
+    function draw() {
+      grid.innerHTML = "";
+      jobs.forEach((job) => {
+        const btn = document.createElement("button");
+        btn.className = "card";
+        const count = job.files.length > 1 ? '<b class="count">' + job.files.length + ' Photos</b>' : "";
+        btn.innerHTML =
+          '<img alt="' + job.note + '" src="' + job.files[0] + '" />' +
+          '<div class="cap">' + count + '<small>' + job.note + '</small></div>';
+        const img = btn.querySelector("img");
+        img.onerror = () => {
+          img.replaceWith(Object.assign(document.createElement("div"), {
+            className: "ph",
+            textContent: "Add photo: " + job.files[0]
+          }));
+        };
+        btn.onclick = () => openJob(job);
+        grid.appendChild(btn);
+      });
+    }
+    function show() {
+      document.getElementById("full").src = current.files[index];
+      document.getElementById("fullcap").textContent =
+        current.note + " (" + (index + 1) + " of " + current.files.length + ")";
+      document.getElementById("prev").style.display = current.files.length > 1 ? "block" : "none";
+      document.getElementById("next").style.display = current.files.length > 1 ? "block" : "none";
+    }
+    function openJob(job) {
+      current = job;
+      index = 0;
+      show();
+      document.getElementById("lightbox").classList.add("open");
+    }
+    document.getElementById("close").onclick = () => document.getElementById("lightbox").classList.remove("open");
+    document.getElementById("lightbox").onclick = (e) => {
+      if (e.target.id === "lightbox") document.getElementById("lightbox").classList.remove("open");
+    };
+    document.getElementById("prev").onclick = (e) => {
+      e.stopPropagation();
+      index = (index - 1 + current.files.length) % current.files.length;
+      show();
+    };
+    document.getElementById("next").onclick = (e) => {
+      e.stopPropagation();
+      index = (index + 1) % current.files.length;
+      show();
+    };
+    draw();
+  </script>
+</body>
+</html>
